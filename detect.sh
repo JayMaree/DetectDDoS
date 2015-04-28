@@ -14,7 +14,7 @@ fi
 
 #set variables
 SYNCREC=`netstat -n -p | grep SYN_REC | sort -u`
-NUMBERCONN=`netstat -ntu | grep ESTAB | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr`
+NUMBERCONN=`netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n|wc -l`
 ESTASH=`netstat -plan|grep :80|awk {'print $5'}|cut -d: -f 1|sort|uniq -c|sort -nk 1`
 
 function printMessage() {
@@ -52,7 +52,7 @@ echo "  Needs: none"
 echo "  "
 echo "  Some current statistics:"
 echo "  SYN_REC Connections: $SYNREC"
-echo "  Connected IPs: $NUMBERCONN"
+echo "  Total connections: $NUMBERCONN"
 echo "  Established Connections: $ESTASH"
 echo "---------------------------------------------------------------"
 echo ""
